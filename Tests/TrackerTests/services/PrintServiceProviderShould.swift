@@ -82,6 +82,11 @@ final class PrintServiceProviderShould: XCTestCase {
         try AssertTrue(receivedEventDescription?.contains(someUserId))
     }
 
+    func testTrackEventOnResetUserId() throws {
+        sut.resetUserId()
+        try AssertTrue(receivedEventDescription?.contains("Reset user"))
+    }
+
     func testInformWhenTrackingDisabled() {
         sut.disableTracking(true)
         XCTAssertEqual(receivedEventDescription, "Disabling tracking")
