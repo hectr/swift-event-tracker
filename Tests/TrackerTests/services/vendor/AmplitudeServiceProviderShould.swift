@@ -15,7 +15,6 @@ final class AmplitudeServiceProviderShould: XCTestCase {
     var anotherEventName: String!
     var parameters: [String: String]!
     var someScreenName: String!
-    var someScreenClass: String!
     var anotherScreenName: String!
     var somePropertyKey: String!
     var somePropertyValue: String!
@@ -29,7 +28,6 @@ final class AmplitudeServiceProviderShould: XCTestCase {
         anotherEventName = "another event name"
         parameters = ["param0": "value0", "param1": "value1"]
         someScreenName = "some screen name"
-        someScreenClass = "some screen class"
         anotherScreenName = "another screen name"
         somePropertyKey = "some property key"
         somePropertyValue = "some property value"
@@ -39,7 +37,6 @@ final class AmplitudeServiceProviderShould: XCTestCase {
         anotherEvent = EventMock(name: anotherEventName)
         someScreen = FirebaseAnalyticsScreenMock()
         someScreen.name = someScreenName
-        someScreen.screenClass = someScreenClass
         anotherScreen = ScreenMock(name: anotherScreenName)
 
         adapter = AmplitudeServiceAdapterMock()
