@@ -21,7 +21,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/hectr/swift-idioms.git", from: "1.9.0"),
+        .package(url: "https://github.com/hectr/swift-idioms.git", from: "2.1.0"),
     ],
     targets: [
         .target(
