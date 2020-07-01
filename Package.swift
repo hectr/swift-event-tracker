@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Package",
+    name: "EventTracker",
     platforms: [
         .iOS("8.0"),
         .macOS("10.9"),
