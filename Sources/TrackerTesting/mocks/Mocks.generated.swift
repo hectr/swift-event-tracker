@@ -879,6 +879,44 @@ public class FacebookServiceAdapterMock: FacebookServiceAdapter {
         logEventParametersClosure?(eventName, parameters)
     }
 
+}
+
+public class FacebookV6ServiceAdapterMock: FacebookV6ServiceAdapter {
+
+    public init() {}
+
+    public static var userID: String?
+
+    // MARK: clearUserID
+
+    public static var clearUserIDCallsCount = 0
+    public static var clearUserIDCalled: Bool {
+        return clearUserIDCallsCount > 0
+    }
+    public static var clearUserIDClosure: (() -> Void)?
+
+    public static func clearUserID() {
+        clearUserIDCallsCount += 1
+        clearUserIDClosure?()
+    }
+
+    // MARK: logEvent
+
+    public static var logEventParametersCallsCount = 0
+    public static var logEventParametersCalled: Bool {
+        return logEventParametersCallsCount > 0
+    }
+    public static var logEventParametersReceivedArguments: (eventName: String, parameters: [String : Any])?
+    public static var logEventParametersReceivedInvocations: [(eventName: String, parameters: [String : Any])] = []
+    public static var logEventParametersClosure: ((String, [String : Any]) -> Void)?
+
+    public static func logEvent(_ eventName: String, parameters: [String : Any]) {
+        logEventParametersCallsCount += 1
+        logEventParametersReceivedArguments = (eventName: eventName, parameters: parameters)
+        logEventParametersReceivedInvocations.append((eventName: eventName, parameters: parameters))
+        logEventParametersClosure?(eventName, parameters)
+    }
+
     // MARK: updateUserProperties
 
     public static var updateUserPropertiesCallsCount = 0
@@ -900,7 +938,7 @@ public class FacebookServiceAdapterMock: FacebookServiceAdapter {
 
 // MARK: - FacebookSettingsAdapter
 
-public class FacebookSettingsAdapterMock: FacebookSettingsAdapter {
+public class FacebookSettingsAdapterMock: FacebookV6SettingsAdapter {
 
     public init() {}
 

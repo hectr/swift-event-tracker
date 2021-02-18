@@ -75,6 +75,14 @@ final class FacebookServiceProviderShould: XCTestCase {
 
     func testSetExpectedProperty() {
         sut.setProperty(somePropertyKey, value: somePropertyValue)
+        XCTAssertTrue(adapter.logEventParametersCalled)
+        XCTAssertEqual(adapter.logEventParametersReceivedArguments?.eventName, "Set property")
+    }
+
+    func testV6SetExpectedProperty() {
+        let adapter = FacebookV6ServiceAdapterMock.self
+        sut = FacebookServiceProvider(adapter: adapter, settingsAdapter: settingsAdapter)
+        sut.setProperty(somePropertyKey, value: somePropertyValue)
         XCTAssertTrue(adapter.updateUserPropertiesCalled)
         for (key, value) in adapter.updateUserPropertiesReceivedProperties ?? [:] {
             XCTAssertEqual(key, somePropertyKey)
@@ -83,6 +91,14 @@ final class FacebookServiceProviderShould: XCTestCase {
     }
 
     func testRemovePropertiesOnResetProperties() throws {
+        sut.resetProperties()
+        XCTAssertTrue(adapter.logEventParametersCalled)
+        XCTAssertEqual(adapter.logEventParametersReceivedArguments?.eventName, "Reset properties")
+    }
+
+    func testV6RemovePropertiesOnResetProperties() throws {
+        let adapter = FacebookV6ServiceAdapterMock.self
+        sut = FacebookServiceProvider(adapter: adapter, settingsAdapter: settingsAdapter)
         sut.setProperty(somePropertyKey, value: somePropertyValue)
         sut.resetProperties()
         XCTAssertEqual(adapter.updateUserPropertiesCallsCount, 2)

@@ -24,13 +24,25 @@ public final class FacebookServiceProvider: AbstractProvider, Service {
     }
 
     public func setProperty(_ key: String, value: String) {
-        userProperties[key] = value
-        adapter.updateUserProperties(userProperties)
+        if let adapter = adapter as? FacebookV6ServiceAdapter.Type {
+            userProperties[key] = value
+            adapter.updateUserProperties(userProperties)
+        } else {
+            userProperties[key] = value
+            let event = NamedEvent("Set property") + [key: value]
+            trackEvent(event)
+        }
     }
 
     public func resetProperties() {
-        userProperties = [:]
-        adapter.updateUserProperties(userProperties)
+        if let adapter = adapter as? FacebookV6ServiceAdapter.Type {
+            userProperties = [:]
+            adapter.updateUserProperties(userProperties)
+        } else {
+            let event = NamedEvent("Reset properties") + ["keys": userProperties.keys.joined(separator: ", ")]
+            userProperties = [:]
+            trackEvent(event)
+        }
     }
 
     public override func disableTracking(_ flag: Bool) {
