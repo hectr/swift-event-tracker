@@ -82,7 +82,7 @@ public class AmplitudeServiceAdapterMock: AmplitudeServiceAdapter {
     public var logEventWithEventPropertiesReceivedInvocations: [(eventType: String?, withEventProperties: [AnyHashable: Any]?)] = []
     public var logEventWithEventPropertiesClosure: ((String?, [AnyHashable: Any]?) -> Void)?
 
-    public func logEvent(_ eventType: String!, withEventProperties: [AnyHashable: Any]!) {
+    public func logEvent(_ eventType: String, withEventProperties: [AnyHashable: Any]?) {
         logEventWithEventPropertiesCallsCount += 1
         logEventWithEventPropertiesReceivedArguments = (eventType: eventType, withEventProperties: withEventProperties)
         logEventWithEventPropertiesReceivedInvocations.append((eventType: eventType, withEventProperties: withEventProperties))
@@ -112,7 +112,7 @@ public class AmplitudeServiceAdapterMock: AmplitudeServiceAdapter {
     public var setUserIdReceivedInvocations: [String?] = []
     public var setUserIdClosure: ((String?) -> Void)?
 
-    public func setUserId(_ id: String!) {
+    public func setUserId(_ id: String?) {
         setUserIdCallsCount += 1
         setUserIdReceivedId = id
         setUserIdReceivedInvocations.append(id)
@@ -129,7 +129,7 @@ public class AmplitudeServiceAdapterMock: AmplitudeServiceAdapter {
     public var setUserPropertiesReceivedInvocations: [[AnyHashable: Any]?] = []
     public var setUserPropertiesClosure: (([AnyHashable: Any]?) -> Void)?
 
-    public func setUserProperties(_ dictionary: [AnyHashable: Any]!) {
+    public func setUserProperties(_ dictionary: [AnyHashable: Any]) {
         setUserPropertiesCallsCount += 1
         setUserPropertiesReceivedDictionary = dictionary
         setUserPropertiesReceivedInvocations.append(dictionary)
