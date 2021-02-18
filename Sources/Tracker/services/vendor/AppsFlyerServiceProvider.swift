@@ -2,7 +2,7 @@ import Foundation
 
 public final class AppsFlyerServiceProvider: AbstractProvider, Service {
     public let supportedTags: [Tag] = [.appsFlyer, .analytics]
-    public override var trackingDisabled: Bool { adapter.isStopTracking }
+    public override var trackingDisabled: Bool { adapter.isStopped }
 
     private let adapter: AppsFlyerServiceAdapter
 
@@ -11,7 +11,7 @@ public final class AppsFlyerServiceProvider: AbstractProvider, Service {
     }
 
     public func trackEvent(_ event: Event) {
-        adapter.trackEvent(event.name, withValues: event.parameters)
+        adapter.logEvent(event.name, withValues: event.parameters)
     }
 
     public func setUserId(_ userId: String) {
@@ -34,6 +34,6 @@ public final class AppsFlyerServiceProvider: AbstractProvider, Service {
 
     public override func disableTracking(_ flag: Bool) {
         super.disableTracking(flag)
-        adapter.isStopTracking = flag
+        adapter.isStopped = flag
     }
 }

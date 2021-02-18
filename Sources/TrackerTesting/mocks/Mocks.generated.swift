@@ -199,27 +199,27 @@ public class AppsFlyerServiceAdapterMock: AppsFlyerServiceAdapter {
 
     public var customerUserID: String?
 
-    public var isStopTracking: Bool {
-        get { return underlyingIsStopTracking }
-        set(value) { underlyingIsStopTracking = value }
+    public var isStopped: Bool {
+        get { return underlyingIsStopped }
+        set(value) { underlyingIsStopped = value }
     }
-    public var underlyingIsStopTracking: Bool!
+    public var underlyingIsStopped: Bool!
 
     // MARK: trackEvent
 
-    public var trackEventWithValuesCallsCount = 0
-    public var trackEventWithValuesCalled: Bool {
-        return trackEventWithValuesCallsCount > 0
+    public var logEventWithValuesCallsCount = 0
+    public var logEventWithValuesCalled: Bool {
+        return logEventWithValuesCallsCount > 0
     }
-    public var trackEventWithValuesReceivedArguments: (eventName: String, withValues: [AnyHashable: Any]?)?
-    public var trackEventWithValuesReceivedInvocations: [(eventName: String, withValues: [AnyHashable: Any]?)] = []
-    public var trackEventWithValuesClosure: ((String, [AnyHashable: Any]?) -> Void)?
+    public var logEventWithValuesReceivedArguments: (eventName: String, withValues: [AnyHashable: Any]?)?
+    public var logEventWithValuesReceivedInvocations: [(eventName: String, withValues: [AnyHashable: Any]?)] = []
+    public var logEventWithValuesClosure: ((String, [AnyHashable: Any]?) -> Void)?
 
-    public func trackEvent(_ eventName: String, withValues: [AnyHashable: Any]?) {
-        trackEventWithValuesCallsCount += 1
-        trackEventWithValuesReceivedArguments = (eventName: eventName, withValues: withValues)
-        trackEventWithValuesReceivedInvocations.append((eventName: eventName, withValues: withValues))
-        trackEventWithValuesClosure?(eventName, withValues)
+    public func logEvent(_ eventName: String, withValues: [AnyHashable: Any]?) {
+        logEventWithValuesCallsCount += 1
+        logEventWithValuesReceivedArguments = (eventName: eventName, withValues: withValues)
+        logEventWithValuesReceivedInvocations.append((eventName: eventName, withValues: withValues))
+        logEventWithValuesClosure?(eventName, withValues)
     }
 
 }
